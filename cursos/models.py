@@ -73,7 +73,7 @@ class Direccion(models.Model):
     comuna = models.CharField(max_length=50,null=False)
     ciudad = models.CharField(max_length=50, null=False)
     region = models.CharField(max_length=50, null=False)
-    estudiante_id = models.ForeignKey(Estudiante, on_delete=models.DO_NOTHING)
+    estudiante_id = models.OneToOneField(Estudiante, on_delete=models.DO_NOTHING, null=True)
     
     def __str__(self):
         return self.calle + ' ' + self.numero

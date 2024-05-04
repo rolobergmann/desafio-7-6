@@ -36,6 +36,9 @@ class CursoServicesTest(TestCase):
 
         resultado_direccion = curso_service.crear_direccion("Los Alamos", 123, "Dpto. 4", "Melipilla", "Melipilla", "RM", resultado_estudiante.pk)
         self.assertTrue(resultado_direccion)
+        
+        resultado_direccion = curso_service.crear_direccion("Los Platanos", 123, "Dpto. 4", "Melipilla", "Melipilla", "RM", resultado_estudiante.pk)
+        self.assertTrue(resultado_direccion)
 
     def test_obtener_estudiante(self):
         curso_service = CursoServices()

@@ -85,7 +85,7 @@ class CursoServices:
     def obtener_estudiante(self,rut):
         try:
             estudiante = Estudiante.objects.get(rut=rut)
-            direccion = estudiante.direccion_set.get()
+            direccion = estudiante.direccion  # Obtener la dirección del estudiante
             return {
                 'rut': estudiante.rut,
                 'nombre': estudiante.nombre,
