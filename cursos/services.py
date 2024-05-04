@@ -44,20 +44,22 @@ class CursoServices:
             print(f"Error creando profesor: {e}")
             return False
 
-    def crear_estudiante(self,rut, nombre, apellido, fecha_nac, activo):
+    def crear_estudiante(self, rut, nombre, apellido, fecha_nac, activo,creado_por):
         try:
             estudiante = Estudiante.objects.create(
                 rut=rut,
                 nombre=nombre,
                 apellido=apellido,
                 fecha_nac=fecha_nac,
-                activo=activo
+                activo=activo,
+                creado_por=creado_por
             )
             estudiante.save()
-            return True  # Indicar éxito
+            return estudiante  # Return the created object
         except Exception as e:
             print(f"Error creando estudiante: {e}")
             return False
+
 
     def crear_direccion(self,calle, numero, depto, comuna, ciudad, region, estudiante_id):
         try:
@@ -69,7 +71,7 @@ class CursoServices:
                 comuna=comuna,
                 ciudad=ciudad,
                 region=region,
-                estudiante=estudiante
+                estudiante_id=estudiante
             )
             direccion.save()
             return True  # Indicar éxito
@@ -83,7 +85,7 @@ class CursoServices:
     def obtener_estudiante(self,rut):
         try:
             estudiante = Estudiante.objects.get(rut=rut)
-            direccion = estudiante.direccion  # Obtiene la dirección asociada al estudiante
+            direccion = estudiante.direccion_set.get()
             return {
                 'rut': estudiante.rut,
                 'nombre': estudiante.nombre,
